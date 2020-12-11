@@ -19,11 +19,11 @@ public class User {
     @Column(name="password")
     private String password;
 
-    @Column(name="role")
-    private Role role;
+    @Column(name="email")
+    private String email;
 
-    @Column(name="cnp")
-    private String cnp;
+    @Column(name="phone")
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -57,19 +57,20 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getCnp() {
-        return cnp;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCnp(String cnp) {
-        this.cnp = cnp;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

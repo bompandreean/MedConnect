@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+<!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet" />
+
+    <!--    adding ^ css folder -->
+    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>
+    <!--    adding ^ js folder -->
+
+<!--    <link rel="stylesheet"-->
+<!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"-->
+<!--          crossorigin="anonymous">-->
+
+</head>
+<body >
+<div class="container">
+    <h1>
+        REGISTER
+    </h1>
+    <form>
+        <div>
+            <input type="text" name="" required="true">
+            <label>
+                First Name
+            </label>
+        </div>
+        <div>
+            <input type="text" name="" required="true">
+            <label>
+                Last Name
+            </label>
+        </div>
+        <div>
+            <input type="email" name="" required="true">
+            <label>
+                Email
+            </label>
+        </div>
+        <div>
+            <input type="password" name="" required="true">
+            <label>
+                Password
+            </label>
+        </div>
+        <div>
+            <input type="password" name="" required="true">
+            <label>
+                Re-Enter Password
+            </label>
+        </div>
+        <input type="submit" value="Register" name="">
+    </form>
+</div>
+</body>
+</html>

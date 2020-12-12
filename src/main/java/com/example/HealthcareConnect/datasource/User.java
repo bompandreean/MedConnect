@@ -2,6 +2,9 @@ package com.example.HealthcareConnect.datasource;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity(name="users")
 public class User {
@@ -11,19 +14,22 @@ public class User {
     private Integer id;
 
     @Column(name="first_name")
+    @NotEmpty
     private String firstName;
 
     @Column(name="last_name")
+    @NotEmpty
     private String lastName;
 
     @Column(name="password")
+    @NotEmpty
     private String password;
 
     @Column(name="email")
+    @NotEmpty
+    @Email
     private String email;
 
-    @Column(name="phone")
-    private String phone;
 
     public Integer getId() {
         return id;
@@ -66,11 +72,5 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

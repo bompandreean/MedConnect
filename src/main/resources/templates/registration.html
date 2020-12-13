@@ -5,15 +5,9 @@
     <title>Registration</title>
 <!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
     <link th:href="@{/css/registration-style.css}" rel="stylesheet" />
-
     <!--    adding ^ css folder -->
-    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>
-    <!--    adding ^ js folder -->
-
-<!--    <link rel="stylesheet"-->
-<!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
-<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"-->
-<!--          crossorigin="anonymous">-->
+<!--    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>-->
+<!--&lt;!&ndash;        adding ^ js folder &ndash;&gt;-->
 
 </head>
 <body >
@@ -21,39 +15,53 @@
     <h1>
         REGISTER
     </h1>
-    <form>
+    <form action="#" th:action="@{'/createUser'}"  th:object="${user}" method="post">
         <div>
-            <input type="text" name="" required="true">
-            <label>
+            <input type="text" id="firstName"
+                    th:field="*{firstName}" required>
+            <label for="firstName">
                 First Name
             </label>
+            <p th:each="error: ${#fields.errors('firstName')}"
+               th:text="${error}">Validation error</p>
         </div>
         <div>
-            <input type="text" name="" required="true">
-            <label>
+            <input type="text" required id="lastName"
+                   th:field="*{lastName}"/>
+            <label for="lastName" >
                 Last Name
             </label>
+            <p th:each="error : ${#fields.errors('lastName')}"
+               th:text="${error}">Validation error</p>
         </div>
         <div>
-            <input type="email" name="" required="true">
-            <label>
+            <input type="email" required id="email"
+                   th:field="*{email}">
+            <label for="email">
                 Email
             </label>
+            <p th:each="error : ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
         </div>
         <div>
-            <input type="password" name="" required="true">
-            <label>
+            <input type="password" required id="password"
+                   th:field="*{password}" >
+            <label for="password">
                 Password
             </label>
+            <p th:each="error : ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
         </div>
-        <div>
-            <input type="password" name="" required="true">
-            <label>
-                Re-Enter Password
-            </label>
-        </div>
-        <input type="submit" value="Register" name="">
+<!--        <div>-->
+<!--            <input type="password" name="" required>-->
+<!--            <label>-->
+<!--                Re-Enter Password-->
+<!--            </label>-->
+<!--        </div>-->
+        <input type="submit" value="Register" />
+
     </form>
+
 </div>
 </body>
 </html>

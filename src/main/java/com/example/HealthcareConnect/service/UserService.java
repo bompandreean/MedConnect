@@ -36,12 +36,6 @@ public class UserService {
 
     public User create(User user) {
         validate(user);
-
-        long count = userRepository.countByEmail(user.getEmail());
-        if (count > 0) {
-            throw new RuntimeException("Email already exists!");
-        }
-
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
@@ -59,6 +53,11 @@ public class UserService {
         }
         if (user.getEmail().isEmpty()) {
             throw new FieldIsMandatory("Email is mandatory ");
+        }
+
+        long count = userRepository.countByEmail(user.getEmail());
+        if (count > 0) {
+            throw new RuntimeException("Email already exists!");
         }
     }
 

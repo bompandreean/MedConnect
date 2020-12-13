@@ -24,10 +24,11 @@ public class CustomUserDetailService implements UserDetailsService {
     private RoleRepository roleRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        if(user == null) {
-            throw new UsernameNotFoundException("Username not found!");
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Not found!");
         }
 
         List<String> roleStringList=new ArrayList<>();
@@ -48,5 +49,7 @@ public class CustomUserDetailService implements UserDetailsService {
                 .password(user.getPassword())
                 .roles(roleStringList.stream().collect(Collectors.joining()))
                 .build();
+
+
     }
 }

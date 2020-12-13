@@ -26,21 +26,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/users/",
                         "/api/users/forgetPassword/*",
-                        "/api/users/resetPassword").permitAll()
+                        "/api/users/resetPassword",
+                        "/createUser").permitAll()
                  .antMatchers( "/css/**").permitAll() //make css file public
 
                 .antMatchers(HttpMethod.GET,
+                        "/",
                         "/registration",
                         "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
 
                 .formLogin()
-                .permitAll()
-                .and()
-
-                .logout()
+                .loginPage("/login")
+                .usernameParameter("email")
                 .permitAll();
+//                .and()
+//
+//                .logout()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .loginProcessingUrl("/perform_login")
+//                .defaultSuccessUrl("/home.html", true)
+//                .failureUrl("/login.html?error=true")
+////                .failureHandler(authenticationFailureHandler())
+//                .and()
+//                .logout()
+//                .logoutUrl("/perform_logout")
+//                .deleteCookies("JSESSIONID");
+////                .logoutSuccessHandler(logoutSuccessHandler());
+
     }
 
     @Bean
@@ -48,10 +64,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailService)
                 .passwordEncoder(bCryptPasswordEncoder());
         super.configure(auth);
     }
+
+
 }

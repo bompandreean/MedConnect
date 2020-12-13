@@ -69,3 +69,9 @@ body{
 .container input:valid{
     border-bottom: 2px solid rgb(66, 133, 244);
 }
+#alert-invalid{
+    color: #f80740;
+}
+#alert-logged-out{
+    color: #f80740;
+}

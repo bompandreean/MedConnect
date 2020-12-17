@@ -75,3 +75,10 @@ body{
 #alert-logged-out{
     color: #f80740;
 }
+.container h3{
+    text-align: center;
+    margin: 0 0 40px;
+    padding: 0;
+    color: #f80740;
+    letter-spacing: 2px;
+}

@@ -1,7 +1,6 @@
 package com.example.HealthcareConnect.controller;
 
 import com.example.HealthcareConnect.datasource.User;
-import com.example.HealthcareConnect.dto.ResetPassword;
 import com.example.HealthcareConnect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,13 +45,13 @@ public class UserController {
 
     }
 
-    @PostMapping("/forgetPassword/{email}")
-    private String forgetPassword(@PathVariable(name = "email") String email) {
-        return userService.forgetPassword(email);
-    }
-
-    @PostMapping("/resetPassword")
-    private void resetPassword(@RequestBody ResetPassword resetPassword) {
-        userService.resetPassword(resetPassword);
-    }
+//    @PostMapping("/forgetPassword/{email}")
+//    private void forgetPassword(@PathVariable(name = "email") String email) {
+//        userService.forgetPassword(email);
+//    }
+//
+//    @PostMapping("/resetPassword")
+//    private void resetPassword(@RequestBody ResetPassword resetPassword) {
+//        userService.resetPassword(resetPassword);
+//    }
 }

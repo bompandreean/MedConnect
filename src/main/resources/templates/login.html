@@ -17,28 +17,31 @@
         LOG IN
     </h1>
     <form name="f" th:action="@{/login}" method="post">
-<!--        <fieldset>-->
-            <div >
-                <input type="email" name="email" required>
-                <label>
-                    Email
-                </label>
-            </div>
-            <div>
-                <input type="password" name="password" required>
-                <label>
-                    Password
-                </label>
-            </div>
-            <div th:if="${param.error}" class="alert alert-error" id="alert-invalid">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success" id="alert-logged-out">
-                You have been logged out.
-            </div>
+        <!--        <fieldset>-->
+        <div>
+            <input type="email" name="email" required>
+            <label>
+                Email
+            </label>
+        </div>
+        <div>
+            <input type="password" name="password" required>
+            <label>
+                Password
+            </label>
+        </div>
+        <div th:if="${param.error}" class="alert alert-error" id="alert-invalid">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success" id="alert-logged-out">
+            You have been logged out.
+        </div>
+        <input type="submit" value="Log in" name="">
+        <!--        </fieldset>-->
+        <div>
 
-            <input type="submit" value="Log in" name="">
-<!--        </fieldset>-->
+        </div>
+        <a href="/forgetPassword"> Forgot Password? </a>
     </form>
 </div>
 </body>

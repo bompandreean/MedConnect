@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Failed Registration</title>
+    <!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet" />
+    <!--    adding ^ css folder -->
+    <!--    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>-->
+    <!--&lt;!&ndash;        adding ^ js folder &ndash;&gt;-->
+
+</head>
+<body >
+<div class="container">
+    <h1>
+        FAILED
+    </h1>
+    <H1>REGISTRATION</H1>
+    <form action="#" th:action="@{'/login'}"  method="get">
+        <div>
+            <h3> There is already a MedConnect account associated
+                with your email address!
+            </h3>
+        </div>
+        <input type="submit" value="Login" />
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,14 +1,13 @@
 package com.example.HealthcareConnect.service;
 
-import com.example.HealthcareConnect.datasource.PasswordRecovery;
 import com.example.HealthcareConnect.datasource.Role;
 import com.example.HealthcareConnect.datasource.User;
-import com.example.HealthcareConnect.dto.ResetPassword;
 import com.example.HealthcareConnect.exceptions.FieldIsMandatory;
 import com.example.HealthcareConnect.exceptions.UserNotFoundException;
 
 import com.example.HealthcareConnect.repository.PasswordRecoveryRepository;
 import com.example.HealthcareConnect.repository.RoleRepository;
+import com.example.HealthcareConnect.repository.TemporaryUserRepository;
 import com.example.HealthcareConnect.repository.UserRepository;
 
 
@@ -33,6 +32,12 @@ public class UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private TemporaryUserRepository temporaryUserRepository;
 
     public User create(User user) {
         validate(user);
@@ -128,43 +133,6 @@ public class UserService {
         return dbUser;
     }
 
-
-
-    public String forgetPassword(String email){
-        User user= userRepository.findByEmail(email);
-        if(user == null){
-            throw new UserNotFoundException("This email is not valid!");
-        }
-
-        String uuid= UUID.randomUUID().toString();
-        PasswordRecovery passwordRecovery = new PasswordRecovery();
-        passwordRecovery.setUserId(user.getId());
-        passwordRecovery.setDate(new Date());
-        passwordRecovery.setUuid(uuid);
-
-        passwordRecoveryRepository.save(passwordRecovery);
-        return uuid;
-    }
-
-    public void resetPassword(ResetPassword resetPassword){
-        PasswordRecovery passwordRecovery =
-                passwordRecoveryRepository.findByUuid(resetPassword.getUid());
-
-        if (passwordRecovery == null) {
-            throw new RuntimeException(("Bad request"));
-        }
-
-
-        User user = userRepository.findById(passwordRecovery.getUserId()).get();
-
-        if (user == null) {
-            throw new RuntimeException("Bad request");
-        }
-
-//        user.setPassword(bCryptPasswordEncoder.encode(resetPassword.getNewPassword()));
-        userRepository.save(user);
-        passwordRecoveryRepository.delete(passwordRecovery);
-    }
 
 
 }

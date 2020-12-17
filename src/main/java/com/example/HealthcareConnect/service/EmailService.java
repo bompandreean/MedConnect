@@ -13,12 +13,12 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendSimpleMessage(String to, String code){
+    public void sendSimpleMessage(String to, String subject, String text){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("MedConnectOfficial@gmail.com");
         message.setTo(to);
         message.setSubject(subject);
-        message.setText(text+code);
+        message.setText(text);
         mailSender.send(message);
     }
 

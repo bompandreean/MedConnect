@@ -1,6 +1,7 @@
 package com.example.HealthcareConnect.controller;
 
 import com.example.HealthcareConnect.datasource.User;
+import com.example.HealthcareConnect.service.EmailService;
 import com.example.HealthcareConnect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping
     private User create(@RequestBody User user) {
@@ -44,14 +48,13 @@ public class UserController {
         return userService.promote(id, role);
 
     }
+    
+    @PostMapping("/sendEmail")
+    private void sendEmail(@RequestParam(name="email") String email){
+        String text=" omggg, mor de merge";
+        String subject="try";
+        emailService.sendSimpleMessage(email,subject,text);
+    }
 
-//    @PostMapping("/forgetPassword/{email}")
-//    private void forgetPassword(@PathVariable(name = "email") String email) {
-//        userService.forgetPassword(email);
-//    }
-//
-//    @PostMapping("/resetPassword")
-//    private void resetPassword(@RequestBody ResetPassword resetPassword) {
-//        userService.resetPassword(resetPassword);
-//    }
+    
 }

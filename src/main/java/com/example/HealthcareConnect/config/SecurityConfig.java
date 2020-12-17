@@ -32,11 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/createUser",
                         "/forgetPasswordAction/*",
                         "/forgetPasswordAction",
-                        "/resetPasswordAction").permitAll()
+                        "/resetPasswordAction",
+                        "/api/users/sendEmail").permitAll()
                  .antMatchers( "/css/**").permitAll() //make css file public
 
                 .antMatchers(HttpMethod.GET,
-                        "/",
                         "/registration",
                         "/login",
                         "/forgetPassword",
@@ -86,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("medconnectofficial@gamil.com");
+        mailSender.setUsername("medconnectofficial@gmail.com");
         mailSender.setPassword("wnwzosgxwwhpudlt");
 
         Properties props = mailSender.getJavaMailProperties();

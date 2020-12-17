@@ -35,8 +35,7 @@ public class PasswordService {
     private TemporaryPasswordRepository temporaryPasswordRepository;
 
 
-
-    public void forgetPassword(String email){
+    public String forgetPassword(String email){
         User user= userRepository.findByEmail(email);
         if(user == null){
             throw new UserNotFoundException("This email is not valid!");
@@ -44,15 +43,13 @@ public class PasswordService {
 
         String uuid= UUID.randomUUID().toString();
 
-//        emailService.sendSimpleMessage(email, uuid);
-
         PasswordRecovery passwordRecovery = new PasswordRecovery();
         passwordRecovery.setUserId(user.getId());
         passwordRecovery.setDate(new Date());
         passwordRecovery.setUuid(uuid);
 
         passwordRecoveryRepository.save(passwordRecovery);
-//        return uuid;
+        return uuid;
     }
 
     public void resetPassword(TemporaryPassword temporaryPassword){

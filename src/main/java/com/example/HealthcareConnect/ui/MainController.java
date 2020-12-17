@@ -3,6 +3,7 @@ package com.example.HealthcareConnect.ui;
 import com.example.HealthcareConnect.datasource.TemporaryPassword;
 import com.example.HealthcareConnect.datasource.TemporaryUser;
 import com.example.HealthcareConnect.datasource.User;
+import com.example.HealthcareConnect.service.EmailService;
 import com.example.HealthcareConnect.service.PasswordService;
 import com.example.HealthcareConnect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class MainController {
 
     @Autowired
     private PasswordService passwordService;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/")
     public String homePage(Model model){
@@ -68,7 +72,10 @@ public class MainController {
                                         Model model) {
         passwordService.createTemporaryUser(temporaryUser);
         try {
-            passwordService.forgetPassword(temporaryUser.getEmail());
+           String code= passwordService.forgetPassword(temporaryUser.getEmail());
+            String subject="Password Recovery";
+            String text="Use the code below to change your password: "+code;
+           emailService.sendSimpleMessage(temporaryUser.getEmail(),subject,text);
         }catch (Exception e){
             e.printStackTrace();
             return "failedPasswordRecovery";

@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    /*background: url(college.png);*/
+    /*background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(0,102,204,1));*/
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -81,4 +81,12 @@ body{
     padding: 0;
     color: #f80740;
     letter-spacing: 2px;
+}
+#grad1 {
+    background-image: linear-gradient(to bottom, rgb(8, 14, 62), rgb(128, 133, 238));
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
 }

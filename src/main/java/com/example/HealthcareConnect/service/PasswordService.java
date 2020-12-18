@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -75,14 +76,22 @@ public class PasswordService {
     public void createTemporaryUser(TemporaryUser temporaryUser){
         temporaryUserRepository.save(temporaryUser);
     }
-    public void deleteTemporaryUser(TemporaryUser temporaryUser){
-        temporaryUserRepository.delete(temporaryUser);
+    public void deleteTemporaryUser(){
+        List<TemporaryUser> temporaryUserList= temporaryUserRepository.findAll();
+        for(TemporaryUser tempUser:temporaryUserList){
+        temporaryUserRepository.delete(tempUser);
+        }
+
     }
 
     public void createTemporaryPassword(TemporaryPassword temporaryPassword){
         temporaryPasswordRepository.save(temporaryPassword);
     }
-    public void deleteTemporaryPassword(TemporaryPassword temporaryPassword){
-        temporaryPasswordRepository.delete(temporaryPassword);
+    public void deleteTemporaryPassword(){
+        List<TemporaryPassword> temporaryPasswordList=temporaryPasswordRepository.findAll();
+        for(TemporaryPassword tempPass: temporaryPasswordList){
+            temporaryPasswordRepository.delete(tempPass);
+        }
+
     }
 }

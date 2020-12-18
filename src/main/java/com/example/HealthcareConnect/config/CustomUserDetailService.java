@@ -35,7 +35,7 @@ public class CustomUserDetailService implements UserDetailsService {
         List<Role> roles = roleRepository.findByUserId(user.getId());
 
         if(roles.isEmpty()){
-            roleStringList.add("PATIENT");
+            roleStringList.add("USER");
         }else{
             for(Role role:roles){
                 roleStringList.add(role.getRole());

@@ -112,8 +112,8 @@ public class UserService {
         if(stringRole.equalsIgnoreCase("doctor")) {
             return "DOCTOR";
         }
-        if(stringRole.equalsIgnoreCase("patient")){
-            return "PATIENT";
+        if(stringRole.equalsIgnoreCase("user")){
+            return "USER";
         }
         if(stringRole.equalsIgnoreCase("admin")){
             return "ADMIN";

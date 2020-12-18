@@ -49,12 +49,12 @@ public class UserController {
 
     }
     
-    @PostMapping("/sendEmail")
-    private void sendEmail(@RequestParam(name="email") String email){
-        String text=" omggg, mor de merge";
-        String subject="try";
-        emailService.sendSimpleMessage(email,subject,text);
-    }
+//    @PostMapping("/sendEmail")
+//    private void sendEmail(@RequestParam(name="email") String email){
+//        String text=" omggg, mor de merge";
+//        String subject="try";
+//        emailService.sendSimpleMessage(email,subject,text);
+//    }
 
     
 }

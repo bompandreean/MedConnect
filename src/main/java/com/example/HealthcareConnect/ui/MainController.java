@@ -100,6 +100,10 @@ public class MainController {
             e.printStackTrace();
             return "failedPasswordRecovery";
         }
+        passwordService.deleteTemporaryPassword();
+        passwordService.deleteTemporaryUser();
         return "login";
     }
+
+
 }

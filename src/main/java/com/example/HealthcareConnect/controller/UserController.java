@@ -43,9 +43,9 @@ public class UserController {
     }
 
     @PutMapping("/promote/{id}")
-    private User promote(@PathVariable(name = "id") Integer id,
-                         @RequestParam(name = "role", required = true) String role) {
-        return userService.promote(id, role);
+    private User promoteToDoctor(@PathVariable(name = "id") Integer id){
+//                         @RequestParam(name = "role", required = true) String role) {
+        return userService.promoteToDoctor(id);
 
     }
     

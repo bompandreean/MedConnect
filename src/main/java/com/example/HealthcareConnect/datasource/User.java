@@ -30,7 +30,6 @@ public class User {
     @Email
     private String email;
 
-
     public Integer getId() {
         return id;
     }

@@ -1,18 +1,18 @@
 package com.example.HealthcareConnect.service;
 
+import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.datasource.Role;
 import com.example.HealthcareConnect.datasource.User;
 import com.example.HealthcareConnect.exceptions.FieldIsMandatory;
 import com.example.HealthcareConnect.exceptions.UserNotFoundException;
 
-import com.example.HealthcareConnect.repository.PasswordRecoveryRepository;
-import com.example.HealthcareConnect.repository.RoleRepository;
-import com.example.HealthcareConnect.repository.TemporaryUserRepository;
-import com.example.HealthcareConnect.repository.UserRepository;
+import com.example.HealthcareConnect.repository.*;
 
 
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +38,9 @@ public class UserService {
 
     @Autowired
     private TemporaryUserRepository temporaryUserRepository;
+
+    @Autowired
+    private DocRepository docRepository;
 
     public User create(User user) {
         validate(user);
@@ -108,29 +111,50 @@ public class UserService {
 
     }
 
-    public String validateRole(String stringRole){
-        if(stringRole.equalsIgnoreCase("doctor")) {
-            return "DOCTOR";
-        }
-        if(stringRole.equalsIgnoreCase("user")){
-            return "USER";
-        }
-        if(stringRole.equalsIgnoreCase("admin")){
-            return "ADMIN";
-        }
-        throw new UserNotFoundException("This role is nonexistent!");
-    }
 
-
-    public User promote(Integer id, String role) {
+    public User promoteToAdmin(Integer id) {
         User dbUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
         Role roleField = new Role();
         roleField.setUserId(id);
-        roleField.setRole(validateRole(role));
+        roleField.setRole("ADMIN");
         roleRepository.save(roleField);
         return dbUser;
+    }
+
+    public User promoteToDoctor(Integer id) {
+        User dbUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
+
+        Role roleField = new Role();
+        roleField.setUserId(id);
+        roleField.setRole("DOCTOR");
+        roleRepository.save(roleField);
+
+        DocUser docUser=new DocUser();
+        docUser.setUserId(id);
+        docRepository.save(docUser);
+
+        return dbUser;
+    }
+
+    public User getCurrentUsersDetails(){
+        UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+
+        String username=userDetails.getUsername();
+        User user= userRepository.findByEmail(username);
+        if(user==null){
+            throw new UserNotFoundException("");
+        }
+        return user;
+    }
+
+    public Integer getCurrentUserId(){
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Integer id= userRepository.findByEmail(principal.getUsername()).getId();
+        return id;
     }
 
 

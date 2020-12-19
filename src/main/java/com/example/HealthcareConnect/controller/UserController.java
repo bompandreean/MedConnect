@@ -42,12 +42,12 @@ public class UserController {
         return userService.findByRole(role);
     }
 
-    @PutMapping("/promote/{id}")
-    private User promoteToDoctor(@PathVariable(name = "id") Integer id){
-//                         @RequestParam(name = "role", required = true) String role) {
-        return userService.promoteToDoctor(id);
-
-    }
+//    @PutMapping("/promote/{id}")
+//    private User promoteToDoctor(@PathVariable(name = "id") Integer id){
+////                         @RequestParam(name = "role", required = true) String role) {
+//        return userService.promoteToDoctor(id);
+//
+//    }
     
 //    @PostMapping("/sendEmail")
 //    private void sendEmail(@RequestParam(name="email") String email){

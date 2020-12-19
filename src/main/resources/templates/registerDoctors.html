@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet" />
+    <!--    adding ^ css folder -->
+    <!--    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>-->
+    <!--&lt;!&ndash;        adding ^ js folder &ndash;&gt;-->
+
+</head>
+<body >
+<div id="grad1"></div>
+<div class="container">
+    <h1>
+        REGISTER AS A DOCTOR
+    </h1>
+    <form action="#" th:action="@{'/registerDoctorsAction'}"  th:object="${doc}" method="post">
+        <div>
+            <input type="text" id="city"
+                   th:field="*{city}" required>
+            <label for="City">
+               City
+            </label>
+            <p th:each="error: ${#fields.errors('city')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <input type="text" required id="street"
+                   th:field="*{street}"/>
+            <label for="street" >
+                Street
+            </label>
+            <p th:each="error : ${#fields.errors('street')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <input type="text" required id="location"
+                   th:field="*{location}">
+            <label for="location">
+               Location
+            </label>
+            <p th:each="error : ${#fields.errors('location')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <input type="text" required id="specialization"
+                   th:field="*{specialization}" >
+            <label for="specialization">
+               Specialization
+            </label>
+            <p th:each="error : ${#fields.errors('specialization')}"
+               th:text="${error}">Validation error</p>
+        </div>
+
+        <input type="submit" value="" />
+
+    </form>
+
+</div>
+</body>
+</html>

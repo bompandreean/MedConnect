@@ -123,7 +123,7 @@ public class UserService {
         return dbUser;
     }
 
-    public User promoteToDoctor(Integer id) {
+    public User promoteToDoctor(Integer id, DocUser docUser) {
         User dbUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
@@ -132,7 +132,7 @@ public class UserService {
         roleField.setRole("DOCTOR");
         roleRepository.save(roleField);
 
-        DocUser docUser=new DocUser();
+//        DocUser docUser=new DocUser();
         docUser.setUserId(id);
         docRepository.save(docUser);
 

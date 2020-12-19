@@ -19,7 +19,7 @@ import java.util.Properties;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    HoldMyPassword holdMyPassword=new HoldMyPassword();
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
@@ -87,8 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         mailSender.setPort(587);
 
         mailSender.setUsername("medconnectofficial@gmail.com");
-        mailSender.setPassword("wnwzosgxwwhpudlt");
-
+        mailSender.setPassword(holdMyPassword.getPassword());
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");

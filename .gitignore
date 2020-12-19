@@ -36,3 +36,5 @@ build/
 mvnw
 mvnw.cmd
 resources/application.properties
+
+/src/main/java/com/example/HealthcareConnect/config/HoldMyPassword.java

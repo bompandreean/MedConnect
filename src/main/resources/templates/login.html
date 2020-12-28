@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
     <link th:href="@{/css/registration-style.css}" rel="stylesheet"/>
-
-    <!--    adding ^ css folder -->
-    <!--    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>-->
-    <!--    adding ^ js folder -->
 
 </head>
 <body>
+<!--<header th:replace="navbar"></header>-->
+
 <div id="grad1"></div>
 <div class="container">
     <h1>
@@ -42,7 +39,11 @@
         <div>
 
         </div>
-        <a href="/forgetPassword"> Forgot Password? </a>
+        <h5>
+            <a href="/forgetPassword"> Forgot Password? </a>
+        </h5><h5>
+        <a href="/registration"> New Here? </a>
+    </h5>
     </form>
 </div>
 </body>

@@ -32,7 +32,7 @@ public class CustomUserDetailService implements UserDetailsService {
         }
 
         List<String> roleStringList=new ArrayList<>();
-        List<Role> roles = roleRepository.findByUserId(user.getId());
+        List<Role> roles = roleRepository.findAllByUserId(user.getId());
 
         if(roles.isEmpty()){
             roleStringList.add("USER");

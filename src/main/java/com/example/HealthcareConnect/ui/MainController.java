@@ -29,7 +29,7 @@ public class MainController {
 //        User user=new User();
 //
 //        model.addAttribute("currentUser", user);
-        return "home";
+        return "seeDoctors";
     }
 
 

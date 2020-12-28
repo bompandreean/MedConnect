@@ -1,25 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-<!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
-    <link th:href="@{/css/registration-style.css}" rel="stylesheet" />
-    <!--    adding ^ css folder -->
-<!--    <script type="text/javascript" th:src="@{/js/homeactions.js}"></script>-->
-<!--&lt;!&ndash;        adding ^ js folder &ndash;&gt;-->
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet"/>
 
 </head>
-<body >
+<body>
 <div id="grad1"></div>
 <div class="container">
     <h1>
         REGISTER
     </h1>
-    <form action="#" th:action="@{'/createUser'}"  th:object="${user}" method="post">
+    <form action="#" th:action="@{'/createUser'}" th:object="${user}" method="post">
         <div>
             <input type="text" id="firstName"
-                    th:field="*{firstName}" required>
+                   th:field="*{firstName}" required>
             <label for="firstName">
                 First Name
             </label>
@@ -29,7 +25,7 @@
         <div>
             <input type="text" required id="lastName"
                    th:field="*{lastName}"/>
-            <label for="lastName" >
+            <label for="lastName">
                 Last Name
             </label>
             <p th:each="error : ${#fields.errors('lastName')}"
@@ -46,20 +42,20 @@
         </div>
         <div>
             <input type="password" required id="password"
-                   th:field="*{password}" >
+                   th:field="*{password}">
             <label for="password">
                 Password
             </label>
             <p th:each="error : ${#fields.errors('password')}"
                th:text="${error}">Validation error</p>
         </div>
-<!--        <div>-->
-<!--            <input type="password" name="" required>-->
-<!--            <label>-->
-<!--                Re-Enter Password-->
-<!--            </label>-->
-<!--        </div>-->
-        <input type="submit" value="Register" />
+        <!--        <div>-->
+        <!--            <input type="password" name="" required>-->
+        <!--            <label>-->
+        <!--                Re-Enter Password-->
+        <!--            </label>-->
+        <!--        </div>-->
+        <input type="submit" value="Register"/>
 
     </form>
 

@@ -1,6 +1,7 @@
 package com.example.HealthcareConnect.controller;
 
 import com.example.HealthcareConnect.datasource.User;
+import com.example.HealthcareConnect.service.DocService;
 import com.example.HealthcareConnect.service.EmailService;
 import com.example.HealthcareConnect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +49,12 @@ public class UserController {
 //        return userService.promoteToDoctor(id);
 //
 //    }
-    
+
 //    @PostMapping("/sendEmail")
 //    private void sendEmail(@RequestParam(name="email") String email){
 //        String text=" omggg, mor de merge";
 //        String subject="try";
 //        emailService.sendSimpleMessage(email,subject,text);
 //    }
-
     
 }

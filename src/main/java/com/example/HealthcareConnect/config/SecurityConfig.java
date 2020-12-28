@@ -33,10 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/forgetPasswordAction",
                         "/resetPasswordAction",
                         "/api/users/sendEmail").permitAll()
-                 .antMatchers( "/css/**").permitAll() //make css file public
+                 .antMatchers( "/css/**", "/images/**").permitAll() //make css file public
 
                 .antMatchers(HttpMethod.GET,
                         "/registration",
+                        "/",
                         "/login",
                         "/forgetPassword",
                         "/resetPassword").permitAll()

@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     List<Role> findByRole(String role);
-    List<Role> findByUserId(Integer id);
+    List<Role> findAllByUserId(Integer id);
+    Role findByUserId(Integer id);
     void deleteByUserId(Integer id);
 
 

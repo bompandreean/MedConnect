@@ -1,13 +1,20 @@
 package com.example.HealthcareConnect.service;
 
 import com.example.HealthcareConnect.datasource.DocUser;
+import com.example.HealthcareConnect.datasource.Role;
+import com.example.HealthcareConnect.datasource.User;
+
+import com.example.HealthcareConnect.exceptions.UserAlreadyExistsException;
 import com.example.HealthcareConnect.exceptions.UserNotFoundException;
 import com.example.HealthcareConnect.repository.DocRepository;
 import com.example.HealthcareConnect.repository.RoleRepository;
 import com.example.HealthcareConnect.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -46,12 +53,48 @@ public class DocService {
         oldDoc.setCity(docUser.getCity());
         oldDoc.setLocation(docUser.getLocation());
         oldDoc.setDescription(docUser.getDescription());
-        oldDoc.setImagePath(docUser.getImagePath());
+//        oldDoc.setImage(docUser.getImage());
         oldDoc.setSpecialization(docUser.getSpecialization());
         //review can't be edited by doctor
 
-         return  docRepository.save(oldDoc);
+        return docRepository.save(oldDoc);
     }
+
+    public User promoteToDoctor(Integer id, DocUser docUser
+//            , MultipartFile multipartFile) throws IOException {
+    ) {
+        User dbUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
+
+
+        Role roleField = new Role();
+        roleField.setUserId(id);
+        roleField.setRole("DOCTOR");
+        roleRepository.save(roleField);
+
+
+//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//        docUser.setImagePath(fileName);
+//        String uploadDir="user-photo/" + docUser.getId();
+//        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        docUser.setUserId(id);
+        docRepository.save(docUser);
+
+        return dbUser;
+    }
+
+//    private boolean alreadyExists(Integer id) {
+//        Role role = roleRepository.findByUserId(id);
+//        if (role != null) {
+//            if (role.getRole().equalsIgnoreCase("DOCTOR")) {
+//                throw new UserAlreadyExistsException("This account already has a doctor role!");
+//            }
+//        }
+//        return false;
+//    }
+
+
 }
 
 

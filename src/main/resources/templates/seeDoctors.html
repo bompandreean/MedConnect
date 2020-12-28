@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Cards</title>
+    <link th:href="@{/css/card.css}" rel="stylesheet"/>
+    <link th:href="@{/css/navbar-style.css}" rel="stylesheet"/>
+</head>
+<body>
+<header th:replace="navbar"></header>
+<section>
+    <div class="container" th:object="${doctors}">
+        <h1 class="heading">Meet the doctors</h1>
+        <div class="card-wrapper" >
+            <div class="card" th:each="doctor: ${doctors}">
+
+                <img th:src="@{/images/background.png}" alt="card background" class="card-img">
+                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">
+                <h1 >Name</h1></td>
+                <p class="job-title" th:text="${doctor.specialization}"></p>
+                <p class="location" th:text="${doctor.city}"></p>
+                <p class="about" th:text="${doctor.description}"></p>
+                <a href="#" class="btn">Contact</a>
+
+            </div>
+
+<!--            <div class="card">-->
+<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
+<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
+<!--                <h1>Namee name</h1>-->
+<!--                <p class="job-title">Dentist</p>-->
+<!--                <p class="location">Cluj</p>-->
+<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
+<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
+<!--                    snjsdklsjd sddbjasjndsa-->
+<!--                </p>-->
+<!--                <a href="#" class="btn">Contact</a>-->
+<!--            </div>-->
+<!--            <div class="card">-->
+<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
+<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
+<!--                <h1>Namee name</h1>-->
+<!--                <p class="job-title">Dentist</p>-->
+<!--                <p class="location">Cluj</p>-->
+<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
+<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
+<!--                    snjsdklsjd sddbjasjndsa-->
+<!--                </p>-->
+<!--                <a href="#" class="btn">Contact</a>-->
+<!--            </div>-->
+<!--            <div class="card">-->
+<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
+<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
+<!--                <h1>Namee name</h1>-->
+<!--                <p class="job-title">Dentist</p>-->
+<!--                <p class="location">Cluj</p>-->
+<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
+<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
+<!--                    snjsdklsjd sddbjasjndsa-->
+<!--                </p>-->
+<!--                <a href="#" class="btn">Contact</a>-->
+<!--            </div>-->
+<!--            <div class="card">-->
+<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
+<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
+<!--                <h1>Namee name</h1>-->
+<!--                <p class="job-title">Dentist</p>-->
+<!--                <p class="location">Cluj</p>-->
+<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
+<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
+<!--                    snjsdklsjd sddbjasjndsa-->
+<!--                </p>-->
+<!--                <a href="#" class="btn">Contact</a>-->
+<!--            </div>-->
+
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

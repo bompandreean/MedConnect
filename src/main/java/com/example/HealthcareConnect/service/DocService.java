@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,6 +38,7 @@ public class DocService {
         return docRepository.findAll();
     }
 
+
     public void deleteDoctor(Integer id) {
         DocUser doc = docRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("This user is not a doctor"));
@@ -53,19 +55,21 @@ public class DocService {
         oldDoc.setCity(docUser.getCity());
         oldDoc.setLocation(docUser.getLocation());
         oldDoc.setDescription(docUser.getDescription());
-//        oldDoc.setImage(docUser.getImage());
+        oldDoc.setFirstLastName(docUser.getFirstLastName());
+        oldDoc.setImagePath(docUser.getImagePath());
         oldDoc.setSpecialization(docUser.getSpecialization());
-        //review can't be edited by doctor
+
 
         return docRepository.save(oldDoc);
     }
 
-    public User promoteToDoctor(Integer id, DocUser docUser
-//            , MultipartFile multipartFile) throws IOException {
-    ) {
+    public User promoteToDoctor(Integer id, DocUser docUser) {
         User dbUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
+        if(alreadyExists(id)){
+        throw new UserAlreadyExistsException("This account already has a doctor role!");
+        }
 
         Role roleField = new Role();
         roleField.setUserId(id);
@@ -79,22 +83,62 @@ public class DocService {
 //        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         docUser.setUserId(id);
+        docUser.setFirstLastName(dbUser.getFirstName().concat(" ").concat(dbUser.getLastName()));
         docRepository.save(docUser);
 
         return dbUser;
     }
 
-//    private boolean alreadyExists(Integer id) {
-//        Role role = roleRepository.findByUserId(id);
-//        if (role != null) {
-//            if (role.getRole().equalsIgnoreCase("DOCTOR")) {
-//                throw new UserAlreadyExistsException("This account already has a doctor role!");
-//            }
+    private boolean alreadyExists(Integer id) {
+        Role role = roleRepository.findByUserId(id);
+        if (role != null) {
+            if (role.getRole().equalsIgnoreCase("DOCTOR")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    public List<DocUser> findByCity(String city){
+//        List<DocUser> doctors=findAllDoctors();
+//        for(DocUser doc:doctors){
+//            if(doc.getCity().equalsIgnoreCase(city))
+//                continue;
+//            else
+//                doctors.remove(doc);
 //        }
-//        return false;
+//        return doctors;
+//    }
+//    public List<DocUser> findBySpecialization(String specialization){
+//        List<DocUser> doctors=findAllDoctors();
+//        for(DocUser doc:doctors){
+//            if(doc.getSpecialization().equalsIgnoreCase(specialization))
+//                continue;
+//            else
+//                doctors.remove(doc);
+//        }
+//        return doctors;
 //    }
 
+    public List<DocUser> findByCityOrSpecialization(String variable) {
+        List<DocUser> doctors;
+        if (variable != null) {
+            doctors = docRepository.findByCity(variable);
+            doctors.addAll(docRepository.findBySpecialization(variable));
+            doctors.addAll(docRepository.findByFirstLastName(variable));
+            if (!doctors.isEmpty()) {
+                return doctors;
+            }
+        }
+        return docRepository.findAll();
+    }
 
+    public DocUser findByCurrentUserId(Integer currentId) {
+        if (currentId == null) {
+            return null;
+        }
+        return docRepository.findByUserId(currentId);
+    }
 }
 
 

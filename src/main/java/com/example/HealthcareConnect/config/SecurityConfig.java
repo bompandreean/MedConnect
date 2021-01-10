@@ -32,22 +32,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/forgetPasswordAction/*",
                         "/forgetPasswordAction",
                         "/resetPasswordAction",
+                        "/findDoctorsAction",
+                        "/files/**",
                         "/api/users/sendEmail").permitAll()
-                 .antMatchers( "/css/**", "/images/**").permitAll() //make css file public
+                 .antMatchers( "/css/**", "/images/**","/files/**").permitAll() //make css file public
 
                 .antMatchers(HttpMethod.GET,
                         "/registration",
                         "/",
+                        "/home",
                         "/login",
                         "/forgetPassword",
-                        "/resetPassword").permitAll()
+                        "/seeDoctors",
+                        "/resetPassword",
+                        "/files/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
 
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .permitAll();
+                .permitAll()
+                .and()
+                .csrf().disable();
 //                .and()
 //
 //                .logout()

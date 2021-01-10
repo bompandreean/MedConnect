@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <!--    <link rel="stylesheet" type="text/css" href="/css/registration-style.css">-->
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet"/>
+    <!--    adding ^ css folder -->
+    <script type="text/javascript" th:src="@{/js/photos.js}"></script>
+    <!--&lt;!&ndash;        adding ^ js folder &ndash;&gt;-->
+
+</head>
+<body>
+<div id="grad1"></div>
+<div class="container">
+    <h1>
+        UPDATE YOUR PROFILE
+    </h1>
+    <form th:action="@{'/updateProfileAction'}" th:object="${currentDocUser}" method="POST"
+          enctype="multipart/form-data">
+
+        <div>
+            <input type="text" id="firstLastname"
+                   th:field="*{firstLastName}">
+            <label for="firstLastname">
+                First & Last Name
+            </label>
+        </div>
+        <div>
+            <input type="text" id="city"
+                   th:field="*{city}">
+            <label for="City">
+                City
+            </label>
+        </div>
+        <div>
+            <input type="text" required id="street"
+                   th:field="*{street}"/>
+            <label for="street">
+                Street
+            </label>
+        </div>
+        <div>
+            <input type="text" required id="location"
+                   th:field="*{location}">
+            <label for="location">
+                Location
+            </label>
+        </div>
+        <div>
+            <input type="text" required id="specialization"
+                   th:field="*{specialization}">
+            <label for="specialization">
+                Specialization
+            </label>
+        </div>
+        <div>
+            <input type="text" required id="description"
+                   th:field="*{description}">
+            <label for="description">
+                Description
+            </label>
+        </div>
+
+        <p id="photo">
+            <label>Photo: </label>
+            <input type="file" name="file" id="file"
+                   accept="image/png, image/jpeg"/>
+        </p>
+        <!--                <p>-->
+        <!--                    <img id="thumbnail" alt="Image Preview"/>-->
+        <!--                    <img th:src="/@{${imagePath}}" />-->
+        <!--                </p>-->
+<!--        <a th:href="${file}" th:text="${file}" />-->
+
+        <input type="submit" value="Update Profile"/>
+
+    </form>
+</div>
+</body>
+</html>

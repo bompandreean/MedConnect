@@ -30,6 +30,10 @@ public class User {
     @Email
     private String email;
 
+//    @OneToOne(mappedBy = "doctors")
+//    private DocUser docUser;
+
+
     public Integer getId() {
         return id;
     }

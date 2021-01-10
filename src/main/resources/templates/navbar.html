@@ -8,15 +8,19 @@
 <!--</head>-->
 <!--<body>-->
 <header >
-    <a href="home.html"> <img class="logo"  th:src="@{/images/logo4.png}" alt="logo"> </a>
+    <a href="/"> <img class="logo"  th:src="@{/images/logo4.png}" alt="logo"> </a>
     <nav>
         <ul class="nav__links">
             <li><a href="#">Services</a></li>
-            <li><a href="/registration">I'm a patient</a></li>
-            <li><a href="/registerDoctors">I'm a doctor</a></li>
+            <li><a href="/registration" th:if="${currentUser == null}" >I'm a patient</a></li>
+            <li><a href="/registerDoctors" th:if="${currentUser == null}" >I'm a doctor</a></li>
         </ul>
     </nav>
-    <a class="cta" href="login.html"><button> Login </button></a>
+    <td>
+        <a class="cta" href="login" th:if="${currentUser == null}"><button> Login </button></a>
+        <a class="cta" href="profile" th:unless="${currentUser== null}">
+            <button> My Profile </button></a>
+    </td>
 </header>
 
 <!--</body>-->

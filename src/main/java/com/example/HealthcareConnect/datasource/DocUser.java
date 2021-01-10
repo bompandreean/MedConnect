@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity(name="doctors")
 public class DocUser {
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -29,8 +30,24 @@ public class DocUser {
     @Column
     private Integer userId;
 
-//    private double review;
+    @Column
+    private String firstLastName;
 
+
+    @Override
+    public String toString() {
+        return "DocUser{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", location='" + location + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", description='" + description + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", userId=" + userId +
+                ", firstLastName='" + firstLastName + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -94,5 +111,13 @@ public class DocUser {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getFirstLastName() {
+        return firstLastName;
+    }
+
+    public void setFirstLastName(String firstLastName) {
+        this.firstLastName = firstLastName;
     }
 }

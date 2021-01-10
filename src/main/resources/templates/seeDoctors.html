@@ -11,67 +11,18 @@
 <section>
     <div class="container" th:object="${doctors}">
         <h1 class="heading">Meet the doctors</h1>
-        <div class="card-wrapper" >
+        <div class="card-wrapper">
             <div class="card" th:each="doctor: ${doctors}">
 
                 <img th:src="@{/images/background.png}" alt="card background" class="card-img">
                 <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">
-                <h1 >Name</h1></td>
+                <h1><p class="name" th:text="${doctor.firstLastName}"></p></h1>
                 <p class="job-title" th:text="${doctor.specialization}"></p>
                 <p class="location" th:text="${doctor.city}"></p>
                 <p class="about" th:text="${doctor.description}"></p>
-                <a href="#" class="btn">Contact</a>
+                <a href="/appointment" class="btn">Contact</a>
 
             </div>
-
-<!--            <div class="card">-->
-<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
-<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
-<!--                <h1>Namee name</h1>-->
-<!--                <p class="job-title">Dentist</p>-->
-<!--                <p class="location">Cluj</p>-->
-<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
-<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
-<!--                    snjsdklsjd sddbjasjndsa-->
-<!--                </p>-->
-<!--                <a href="#" class="btn">Contact</a>-->
-<!--            </div>-->
-<!--            <div class="card">-->
-<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
-<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
-<!--                <h1>Namee name</h1>-->
-<!--                <p class="job-title">Dentist</p>-->
-<!--                <p class="location">Cluj</p>-->
-<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
-<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
-<!--                    snjsdklsjd sddbjasjndsa-->
-<!--                </p>-->
-<!--                <a href="#" class="btn">Contact</a>-->
-<!--            </div>-->
-<!--            <div class="card">-->
-<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
-<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
-<!--                <h1>Namee name</h1>-->
-<!--                <p class="job-title">Dentist</p>-->
-<!--                <p class="location">Cluj</p>-->
-<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
-<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
-<!--                    snjsdklsjd sddbjasjndsa-->
-<!--                </p>-->
-<!--                <a href="#" class="btn">Contact</a>-->
-<!--            </div>-->
-<!--            <div class="card">-->
-<!--                <img th:src="@{/images/background.png}" alt="card background" class="card-img">-->
-<!--                <img th:src="@{/images/doc.jpg}" alt="profile image" class="profile-img">-->
-<!--                <h1>Namee name</h1>-->
-<!--                <p class="job-title">Dentist</p>-->
-<!--                <p class="location">Cluj</p>-->
-<!--                <p class="about"> Simple description..adhas sjdhshgsvsdhchsdbsdgcsd-->
-<!--                    ad bhsadjasjd kasds  djbajsdb jasndkasdjka smdjjs-->
-<!--                    snjsdklsjd sddbjasjndsa-->
-<!--                </p>-->
-<!--                <a href="#" class="btn">Contact</a>-->
-<!--            </div>-->
 
         </div>
 

@@ -1,8 +1,10 @@
 package com.example.HealthcareConnect.ui;
 
+import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.datasource.TemporaryPassword;
 import com.example.HealthcareConnect.datasource.TemporaryUser;
 import com.example.HealthcareConnect.datasource.User;
+import com.example.HealthcareConnect.service.DocService;
 import com.example.HealthcareConnect.service.EmailService;
 import com.example.HealthcareConnect.service.PasswordService;
 import com.example.HealthcareConnect.service.UserService;
@@ -11,12 +13,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class MainController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DocService docService;
 
     @Autowired
     private PasswordService passwordService;
@@ -26,11 +34,14 @@ public class MainController {
 
     @GetMapping("/")
     public String homePage(Model model){
-//        User user=new User();
-//
-//        model.addAttribute("currentUser", user);
-        return "seeDoctors";
+        model.addAttribute("currentUser", userService.getCurrentUsersDetails());
+        return "home";
     }
+    @GetMapping(value="/home")
+    public  String home(Model model){
+        model.addAttribute("currentUser", userService.getCurrentUsersDetails());
+        return "home";}
+    
 
 
     @GetMapping("/registration")
@@ -105,6 +116,12 @@ public class MainController {
         return "login";
     }
 
-
+    @RequestMapping(value="/profile", method =RequestMethod.GET)
+    private String seeProfile(Model model){
+        model.addAttribute("currentUser", userService.getCurrentUsersDetails());
+        model.addAttribute("currentDocUser",
+                docService.findByCurrentUserId(userService.getCurrentUserId()) );
+        return "profile";
+    }
 
 }

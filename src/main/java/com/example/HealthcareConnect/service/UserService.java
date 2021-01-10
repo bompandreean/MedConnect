@@ -100,7 +100,7 @@ public class UserService {
         } else {
             roles = roleRepository.findByRole(role);
         }
-        if(roles.isEmpty()){
+        if (roles.isEmpty()) {
             throw new UserNotFoundException("Users with this role not found!");
         }
         List<User> users = new ArrayList<>();
@@ -124,25 +124,27 @@ public class UserService {
     }
 
 
-
-    public User getCurrentUsersDetails(){
-        UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext()
+    public User getCurrentUsersDetails() {
+        Object userDetails = SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
 
-        String username=userDetails.getUsername();
-        User user= userRepository.findByEmail(username);
-        if(user==null){
-            throw new UserNotFoundException("");
+        if (userDetails instanceof UserDetails) {
+           UserDetails userDetails2=(UserDetails) userDetails;
+            String username = userDetails2.getUsername();
+            User user = userRepository.findByEmail(username);
+            if (user == null) {
+                throw new UserNotFoundException("");
+            }
+            return user;
         }
-        return user;
+        return null;
     }
 
-    public Integer getCurrentUserId(){
+    public Integer getCurrentUserId() {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Integer id= userRepository.findByEmail(principal.getUsername()).getId();
+        Integer id = userRepository.findByEmail(principal.getUsername()).getId();
         return id;
     }
-
 
 
 }

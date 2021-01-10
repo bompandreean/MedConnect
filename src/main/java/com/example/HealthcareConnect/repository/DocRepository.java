@@ -10,4 +10,8 @@ import java.util.List;
 public interface DocRepository extends JpaRepository<DocUser, Integer> {
     DocUser findByUserId(Integer id);
     void deleteByUserId(Integer userId);
+//    List<DocUser> findByCityAndSpecialization(String city, String specialization);
+    List<DocUser> findByCity(String city);
+    List<DocUser> findBySpecialization(String specialization);
+    List<DocUser> findByFirstLastName(String value);
 }

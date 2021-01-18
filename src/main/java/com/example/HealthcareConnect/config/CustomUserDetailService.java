@@ -35,6 +35,10 @@ public class CustomUserDetailService implements UserDetailsService {
         List<Role> roles = roleRepository.findAllByUserId(user.getId());
 
         if(roles.isEmpty()){
+            Role role=new Role();
+            role.setUserId(user.getId());
+            role.setRole("USER");
+            roleRepository.save(role);
             roleStringList.add("USER");
         }else{
             for(Role role:roles){

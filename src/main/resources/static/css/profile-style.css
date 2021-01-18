@@ -1,0 +1,139 @@
+
+.container{
+    position: absolute;
+    /*top: 60%;*/
+    /*left: 30%;*/
+    transform: translate(-50%, -50%);
+    /*width: 450px;*/
+    background: #fff;
+    /*padding: 45px;*/
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+
+.container table {
+    position: relative;
+    border-collapse:collapse;
+    margin: 1px 10px 30px 10px;
+
+}
+.container table th,
+.container table td{
+    padding: 5px 10px;
+}
+.container table th td tr {
+    position: absolute;
+    top: 0;
+    pointer-events: none;
+    left: 0px;
+    right: 5px;
+    background-color:rgb(255,255,255);
+    /*align-items:left;*/
+}
+
+.container th{
+    left: 20px;
+    color: rgb(66, 133, 244);
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.container img{
+    /*width: 15rem;*/
+    /*height: 15rem;*/
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: -1.5rem;
+    z-index: 999;
+    border: 1rem solid #ebeef8;
+    align-content: center;
+}
+.container div{
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    align-content: center;
+    align-self: flex-end;
+}
+
+@media screen and (max-width:1024px){
+    .container {
+        top:380px;
+        left:200px;
+        width: 350px;
+        padding: 20px;
+    }
+    .container img{
+        width: 12rem;
+        height: 12rem;
+    }
+
+    .container table thead{
+        display:none;
+    }
+    .container table tr,
+    .container table tr{
+        display:block;
+    }
+    .container table td{
+        /*padding-left:54%;*/
+        position:relative;
+    }
+    .container table td:before{
+        position:absolute;
+        padding:5px;
+        left:0;
+        top:0;
+        bottom:0;
+        /*width:45% ;*/
+        content: attr(data-col-title);
+    }
+}
+
+@media screen and (min-width:1024px){
+    .container{
+        top: 440px;
+        left: 30%;
+        width: 450px;
+        padding: 45px;
+    }
+    .container table td:before{
+        content: attr(data-col-title);
+    }
+    .container img {
+        width: 15rem;
+        height: 15rem;
+    }
+}
+.background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index:-2;
+    background-color:#24252A;
+}
+.gif-profile{
+    /* display:flex; */
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    width:100%;
+    /*bottom:-40px;*/
+    z-index:-1;
+}
+
+@media screen and (max-height:800px){
+    .gif-profile{
+        bottom:-230px;
+    }
+}
+@media screen and (min-height:800px){
+    .gif-profile{
+        bottom:0;
+    }
+}

@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/users/",
+                .antMatchers(HttpMethod.POST,
                         "/createUser",
                         "/forgetPasswordAction/*",
                         "/forgetPasswordAction",
@@ -35,7 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/findDoctorsAction",
                         "/files/**",
                         "/api/users/sendEmail").permitAll()
-                 .antMatchers( "/css/**", "/images/**","/files/**").permitAll() //make css file public
+                 .antMatchers( "/css/**", "/images/**",
+                         "/files/**").permitAll() //make css file public
 
                 .antMatchers(HttpMethod.GET,
                         "/registration",
@@ -44,8 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login",
                         "/forgetPassword",
                         "/seeDoctors",
-                        "/resetPassword",
-                        "/files/**").permitAll()
+                        "/resetPassword").permitAll()
                 .anyRequest().authenticated()
                 .and()
 

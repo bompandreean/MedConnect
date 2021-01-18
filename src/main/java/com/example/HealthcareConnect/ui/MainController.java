@@ -1,13 +1,7 @@
 package com.example.HealthcareConnect.ui;
 
-import com.example.HealthcareConnect.datasource.DocUser;
-import com.example.HealthcareConnect.datasource.TemporaryPassword;
-import com.example.HealthcareConnect.datasource.TemporaryUser;
-import com.example.HealthcareConnect.datasource.User;
-import com.example.HealthcareConnect.service.DocService;
-import com.example.HealthcareConnect.service.EmailService;
-import com.example.HealthcareConnect.service.PasswordService;
-import com.example.HealthcareConnect.service.UserService;
+import com.example.HealthcareConnect.datasource.*;
+import com.example.HealthcareConnect.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +25,10 @@ public class MainController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private AppointmentService appointmentService;
+
 
     @GetMapping("/")
     public String homePage(Model model){
@@ -123,5 +121,7 @@ public class MainController {
                 docService.findByCurrentUserId(userService.getCurrentUserId()) );
         return "profile";
     }
+
+
 
 }

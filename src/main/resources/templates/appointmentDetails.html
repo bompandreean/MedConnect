@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/navbar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sidebar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/table-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet"/>
+    <style>
+        .sidenav {
+            height: 100%;
+        }
+
+        #grad1 {
+            z-index: -3;
+            background-image: linear-gradient(to bottom left, rgb(0,0,0), rgb(128, 133, 238));
+        }
+        .container h4{
+            font-family: sans-serif;
+            text-align: left;
+            color:rgba(0,0,0,0.7);
+        }
+        .container p{
+            margin-bottom:20px;
+        }
+        .container span{
+            color:rgb(0,0,0);
+        }
+        .container button{
+            border-radius: 25px;
+            width: 100%;
+            height: 40px;
+            cursor: pointer;
+            background: rgb(66, 133, 244);
+            color: #fff;
+            margin-bottom: 0;
+        }
+        .container button:hover{
+            background: #f7497d;
+        }
+    </style>
+
+</head>
+<body>
+<header th:replace="navbar"></header>
+<header class="sidenav" th:replace="sidebar"></header>
+<div id="grad1"></div>
+<div class="container">
+    <h1>
+        APPOINTMENT REQUEST
+    </h1>
+    <form th:action="@{'/acceptAppointment/'+${appointment.id}}"  method="post" >
+        <div>
+            <h4>
+                <p><span th:text="${user.firstName.toUpperCase()}"> </span>
+                    <span th:text="${user.lastName.toUpperCase()}"> </span>
+                    has requested an appointment on: 
+                    <span th:text="${appointment.appointmentDate}"> </span>
+                     at:
+                    <span th:text="${appointment.appointmentTime}"> </span>
+                </p>The appointment reasons are:
+                <span  th:text="${appointment.briefDescription}"></span>
+                </p>
+                <p> The patient phone number is:
+                    <span  th:text="${appointment.phone}" ></span>
+                </p>
+            </h4>
+            <p> </p>
+        </div>
+        <input type="submit" value="Accept">
+        <h4 style="text-align:center;">
+            Or
+        </h4>
+    </form>
+    <form th:action="@{'/declineAppointment/' +${appointment.id}}" method="post">
+        <input type="submit" value="Decline"/>
+    </form>
+</div>
+
+
+</body>
+</html>

@@ -139,6 +139,16 @@ public class DocService {
         }
         return docRepository.findByUserId(currentId);
     }
+    public String getOldImagePath(Integer id){
+        DocUser doc=docRepository.findById(id)
+                .orElseThrow(()->new UserNotFoundException("not found"));
+       return doc.getImagePath();
+    }
+
+    public DocUser findById(Integer docId){
+        return docRepository.findById(docId)
+                .orElseThrow(()->new UserNotFoundException("Doctor not Found!"));
+    }
 }
 
 

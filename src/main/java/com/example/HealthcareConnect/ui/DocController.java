@@ -6,6 +6,8 @@ import com.example.HealthcareConnect.service.PasswordService;
 import com.example.HealthcareConnect.service.UserService;
 
 
+import com.example.HealthcareConnect.storage.FileUploadController;
+import com.example.HealthcareConnect.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -15,21 +17,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
 public class DocController {
 
-//    private final StorageService storageService;
-//
-//    @Autowired
-//    public DocController(StorageService storageService) {
-//        this.storageService = storageService;
-//    }
+    private final StorageService storageService;
+
+    @Autowired
+    public DocController(StorageService storageService) {
+        this.storageService = storageService;
+    }
 
     @Autowired
     private UserService userService;
@@ -114,26 +118,13 @@ public class DocController {
         return "seeDoctors";
     }
 
-
-//    @PostMapping("/")
-//    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-//                                   RedirectAttributes redirectAttributes) {
-//
-//        storageService.store(file);
-//        redirectAttributes.addFlashAttribute("message",
-//                "You successfully uploaded " + file.getOriginalFilename() + "!");
-//
-//        return "redirect:/";
-//    }
-//
-//    @ExceptionHandler(StorageFileNotFoundException.class)
-//    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
-//        return ResponseEntity.notFound().build();
-//    }
-
     @GetMapping("/updateProfile")
     public String updateProfile(Model model) {
-//        model.addAttribute("currentUser", userService.getCurrentUsersDetails());
+
+        model.addAttribute("files", storageService.loadAll().map(
+                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+                        "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList()));
         model.addAttribute("currentDocUser",
                 docService.findByCurrentUserId(userService.getCurrentUserId()) );
         return "updateProfile";
@@ -141,10 +132,20 @@ public class DocController {
 
     @RequestMapping(value = "/updateProfileAction", method = RequestMethod.POST)
     public String updateProfileAction(@ModelAttribute DocUser currentDocUser,
-                                      @RequestParam("file") MultipartFile file){
-//        storageService.store(file);
-        docService.update(currentDocUser.getId(), currentDocUser);
+                                      @RequestParam("file") MultipartFile file,
+                                      RedirectAttributes redirectAttributes){
+        if(file.isEmpty()){
+            Integer docUserId=currentDocUser.getId();
+            currentDocUser.setImagePath(docService.getOldImagePath(docUserId));
+            docService.update(currentDocUser.getId(), currentDocUser);
+            return "redirect:/profile";
+        }
+        storageService.store(file);
+        redirectAttributes.addFlashAttribute("message",
+                "You successfully uploaded " + file.getOriginalFilename() + "!");
 
+        currentDocUser.setImagePath("/files/"+file.getOriginalFilename());
+        docService.update(currentDocUser.getId(), currentDocUser);
         return "redirect:/profile";
     }
     @GetMapping("/appointment")
@@ -153,5 +154,7 @@ public class DocController {
                 docService.findByCurrentUserId(userService.getCurrentUserId()) );
         return "makeAppointment";
     }
+
+
 
 }

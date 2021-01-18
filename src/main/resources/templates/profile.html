@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <title>My Profile</title>
     <link th:href="@{/css/navbar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sidebar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/profile-style.css}" rel="stylesheet"/>
 
 </head>
 <body>
 <header th:replace="navbar"></header>
+<header class="sidenav" th:replace="sidebar"></header>
+<div class="container">
 
 <table th:object="${currentUser}">
+    <tr >
+        <th>Id:</th>
+        <td th:text="${currentUser.id}"></td>
+    </tr>
     <tr>
         <th>First name:</th>
         <td th:text="${currentUser.firstName}"></td>
@@ -23,6 +31,7 @@
         <td th:text="${currentUser.email}"></td>
     </tr>
 </table>
+
 <table th:object="${currentDocUser}" th:if="${currentDocUser !=null}">
     <tr>
         <th>Specialization: </th>
@@ -44,15 +53,23 @@
         <th>Description: </th>
         <td th:text="${currentDocUser.description}"></td>
     </tr>
-    <tr>
-        <th>Profile Picture: </th>
-        <td>
-<!--            <img th:src="/@{${currentDocUser.imagePath}}"> -->
-        </td>
-    </tr>
-    <a href="updateProfile">
-        <button>Update Profile </button></a>
-</table>
 
+    <tr th:if="${currentDocUser.imagePath}!=null">
+<!--            <img th:src="@{/files/doctor2.jpg}" alt="Profile Picture"/>-->
+            <img th:src="${currentDocUser.imagePath}" alt="Profile Picture"/>
+    </tr>
+
+
+    <div>
+        <a href="updateProfile">
+            <button>Update Profile </button></a>
+    </div>
+</table>
+</div>
+<div class=background></div>
+
+<div>
+    <img class="gif-profile" th:src="@{/images/home2.gif}" alt="gif">
+</div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.example.HealthcareConnect.service;
 
+import com.example.HealthcareConnect.datasource.Appointment;
 import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.datasource.Role;
 import com.example.HealthcareConnect.datasource.User;
@@ -16,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -41,6 +44,8 @@ public class UserService {
 
     @Autowired
     private DocRepository docRepository;
+
+
 
     public User create(User user) {
         validate(user);
@@ -144,6 +149,16 @@ public class UserService {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer id = userRepository.findByEmail(principal.getUsername()).getId();
         return id;
+    }
+
+    public String getUserRole(Integer userId){
+
+        return roleRepository.findByUserId(userId).getRole().toUpperCase();
+    }
+
+    public User findById(Integer userId){
+        return userRepository.findById(userId)
+                .orElseThrow(()-> new UserNotFoundException("User not found"));
     }
 
 

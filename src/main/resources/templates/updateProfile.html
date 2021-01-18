@@ -20,6 +20,13 @@
           enctype="multipart/form-data">
 
         <div>
+            <input type="text" id="id"
+                   th:field="*{id}" readonly>
+            <label for="id">
+                Id
+            </label>
+        </div>
+        <div>
             <input type="text" id="firstLastname"
                    th:field="*{firstLastName}">
             <label for="firstLastname">
@@ -62,11 +69,25 @@
             </label>
         </div>
 
-        <p id="photo">
-            <label>Photo: </label>
-            <input type="file" name="file" id="file"
-                   accept="image/png, image/jpeg"/>
-        </p>
+        <div th:if="${message}">
+            <h2 th:text="${message}"/>
+        </div>
+
+        <div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <table>
+                    <tr><td>File to upload:</td>
+                        <td><input type="file" name="file"  accept="image/png, image/jpeg"/></td>
+                    </tr>
+<!--                    <tr><td></td><td><input type="submit" value="Upload" /></td></tr>-->
+                </table>
+        </div>
+
+<!--        <p id="photo">-->
+<!--            <label>Photo: </label>-->
+<!--            <input type="file" name="file" id="file"-->
+<!--                   accept="image/png, image/jpeg"/>-->
+<!--        </p>-->
         <!--                <p>-->
         <!--                    <img id="thumbnail" alt="Image Preview"/>-->
         <!--                    <img th:src="/@{${imagePath}}" />-->

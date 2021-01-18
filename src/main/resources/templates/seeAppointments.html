@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Appointments</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link th:href="@{/css/navbar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sidebar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/table-style.css}" rel="stylesheet"/>
+    <style>
+        .sidenav{height: 100%;}
+    </style>
+</head>
+<body>
+<header th:replace="navbar"></header>
+<header class="sidenav" th:replace="sidebar"></header>
+<table class="table" th:object="${appointments}" >
+    <thead>
+    <tr>
+<!--        <th scope="col">#</th>-->
+<!--        <th scope="col">Name</th>-->
+<!--        <th scope="col">Phone</th>-->
+        <th scope="col">Made on</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Status</th>
+        <th scope="col" th:if="${role =='DOCTOR'}">Get Details</th>
+
+<!--        button to change the status
+            visible only for doctors -->
+    </tr>
+    </thead>
+    <tbody index=1>
+    <tr th:each="appointment: ${appointments}">
+<!--        <td th:text="${iapp}"></td>-->
+<!--        <td th:text="${doctors.get(index).firstLastName}"></td>-->
+<!--        <td th:text="${appointment.phone}"></td>-->
+        <td th:text="${appointment.currentDay}"></td>
+        <td th:text="${appointment.appointmentDate}"></td>
+        <td th:text="${appointment.appointmentTime}"></td>
+        <td th:text="${appointment.appStatus}"></td>
+        <td th:if="${role=='DOCTOR'}">
+         <a th:href="@{'/appointmentDetails/' +${appointment.id}}">
+             <button >See Appointment</button>
+         </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

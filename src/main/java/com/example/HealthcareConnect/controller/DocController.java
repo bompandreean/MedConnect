@@ -1,4 +1,4 @@
-package com.example.HealthcareConnect.ui;
+package com.example.HealthcareConnect.controller;
 
 import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.service.DocService;

@@ -1,11 +1,9 @@
-package com.example.HealthcareConnect.ui;
+package com.example.HealthcareConnect.controller;
 
 import com.example.HealthcareConnect.datasource.Appointment;
-import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.datasource.User;
 import com.example.HealthcareConnect.service.AppointmentService;
 import com.example.HealthcareConnect.service.DocService;
-import com.example.HealthcareConnect.service.PasswordService;
 import com.example.HealthcareConnect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

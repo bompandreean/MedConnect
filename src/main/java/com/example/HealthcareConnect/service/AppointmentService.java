@@ -33,27 +33,25 @@ public class AppointmentService {
 
 
     public void makeAppointment(Appointment appointment){
-        System.out.println(appointment.getDocId());
-        System.out.println(appointment.getUserId());
 
         appointment.setAppStatus("Processing");
         appointment.setCurrentDay(LocalDate.now().toString());
         appointmentRepository.save(appointment);
     }
 
-    public Appointment updateAppointment(Integer userId, Integer docId, Appointment ap){
-        Appointment appointment=appointmentRepository.findById(ap.getId())
-                .orElseThrow(()->new EntityNotFoundException("not found"));
-        appointment.setUserId(userId);
-        appointment.setDocId(docId);
-        appointment.setAppointmentDate(ap.getAppointmentDate());
-        appointment.setAppointmentTime(ap.getAppointmentTime());
-        appointment.setBriefDescription(ap.getBriefDescription());
-        appointment.setPhone(ap.getPhone());
-        appointment.setAppStatus("Processing");
-
-        return appointmentRepository.save(appointment);
-    }
+//    public Appointment updateAppointment(Integer userId, Integer docId, Appointment ap){
+//        Appointment appointment=appointmentRepository.findById(ap.getId())
+//                .orElseThrow(()->new EntityNotFoundException("not found"));
+//        appointment.setUserId(userId);
+//        appointment.setDocId(docId);
+//        appointment.setAppointmentDate(ap.getAppointmentDate());
+//        appointment.setAppointmentTime(ap.getAppointmentTime());
+//        appointment.setBriefDescription(ap.getBriefDescription());
+//        appointment.setPhone(ap.getPhone());
+//        appointment.setAppStatus("Processing");
+//
+//        return appointmentRepository.save(appointment);
+//    }
 
     public Appointment changeState(Integer id, String status){
         Appointment appointment=appointmentRepository.findById(id)
@@ -76,22 +74,22 @@ public class AppointmentService {
         return app;
     }
 
-    public List<DocUser> getMyDoctors(List<Appointment> myApp){
-        List<DocUser> myDoctors=new ArrayList<>();
-        for(Appointment app:myApp){
-            myDoctors.add(docRepository.findById(app.getDocId()).get());
-        }
-        return myDoctors;
-    }
-
-
-    public List<User> getMyPatients(List<Appointment> myApp){
-        List<User> myPatients=new ArrayList<>();
-        for(Appointment app:myApp){
-            myPatients.add(userRepository.findById(app.getUserId()).get());
-        }
-        return myPatients;
-    }
+//    public List<DocUser> getMyDoctors(List<Appointment> myApp){
+//        List<DocUser> myDoctors=new ArrayList<>();
+//        for(Appointment app:myApp){
+//            myDoctors.add(docRepository.findById(app.getDocId()).get());
+//        }
+//        return myDoctors;
+//    }
+//
+//
+//    public List<User> getMyPatients(List<Appointment> myApp){
+//        List<User> myPatients=new ArrayList<>();
+//        for(Appointment app:myApp){
+//            myPatients.add(userRepository.findById(app.getUserId()).get());
+//        }
+//        return myPatients;
+//    }
 
     public Appointment findById(Integer id){
         return appointmentRepository.findById(id)

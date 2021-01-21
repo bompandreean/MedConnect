@@ -30,6 +30,9 @@
         <th>Email: </th>
         <td th:text="${currentUser.email}"></td>
     </tr>
+    <tr th:if="${currentDocUser ==null}">
+        Your data is visible only for you and your doctors!
+    </tr>
 </table>
 
 <table th:object="${currentDocUser}" th:if="${currentDocUser !=null}">

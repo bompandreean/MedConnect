@@ -148,12 +148,12 @@ public class DocController {
         docService.update(currentDocUser.getId(), currentDocUser);
         return "redirect:/profile";
     }
-    @GetMapping("/appointment")
-    public String makeAppointment(Model model) {
-        model.addAttribute("currentDocUser",
-                docService.findByCurrentUserId(userService.getCurrentUserId()) );
-        return "makeAppointment";
-    }
+//    @GetMapping("/appointment")
+//    public String makeAppointment(Model model) {
+//        model.addAttribute("currentDocUser",
+//                docService.findByCurrentUserId(userService.getCurrentUserId()) );
+//        return "makeAppointment";
+//    }
 
 
 

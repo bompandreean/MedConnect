@@ -146,7 +146,8 @@ public class UserService {
     }
 
     public Integer getCurrentUserId() {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails principal =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer id = userRepository.findByEmail(principal.getUsername()).getId();
         return id;
     }

@@ -17,7 +17,7 @@
                 <img th:src="@{/images/background.png}" alt="card background" class="card-img">
                 <img th:src="${doctor.imagePath}" alt="profile image" class="profile-img">
                 <h1><p class="name" th:text="${doctor.firstLastName}"></p></h1>
-                <p class="job-title" th:text="${doctor.specialization}"></p>
+                <p class="job-title" th:text="${doctor.specialization.toUpperCase()}"></p>
                 <p class="location" th:text="${doctor.city}"></p>
                 <p class="about" th:text="${doctor.description}"></p>
 <!--                <a th:href="/contact/{id}(id=${doctor.id})" class="btn">Contact</a>-->

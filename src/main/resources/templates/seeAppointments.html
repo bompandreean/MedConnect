@@ -18,6 +18,7 @@
 <body>
 <header th:replace="navbar"></header>
 <header class="sidenav" th:replace="sidebar"></header>
+<div class="container"><h1>MY APPOINTMENTS</h1></div>
 <table class="table" th:object="${appointments}" >
     <thead>
     <tr>
@@ -29,6 +30,7 @@
         <th scope="col">Time</th>
         <th scope="col">Status</th>
         <th scope="col" th:if="${role =='DOCTOR'}">Get Details</th>
+        <th scope="col" th:if="${role =='DOCTOR'}">Leave a Recommendation</th>
 
 <!--        button to change the status
             visible only for doctors -->
@@ -45,7 +47,11 @@
         <td th:text="${appointment.appStatus}"></td>
         <td th:if="${role=='DOCTOR'}">
          <a th:href="@{'/appointmentDetails/' +${appointment.id}}">
-             <button >See Appointment</button>
+             <button >See more..</button>
+         </a>
+        </td><td th:if="${role=='DOCTOR'}">
+         <a th:href="@{'/recommendation/' +${appointment.userId}}">
+             <button >Message</button>
          </a>
         </td>
     </tr>

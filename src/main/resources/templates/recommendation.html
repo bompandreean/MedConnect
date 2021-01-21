@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div id="grad1"></div>
+<div class="container">
+    <h1>
+       RECOMMENDATION
+    </h1>
+    <h5>
+        Leave your patient the name of the
+        meds he needs to take,
+        rules he needs to follow or your opinion.
+    </h5>
+    <form  th:action="@{'/recommendationAction/' + ${patientId}}" th:object="${recommendation}" method="post">
+<!--        <div>-->
+<!--            <input type="number" id="id"-->
+<!--                   th:field="${recommendation.receiverId}" readonly>-->
+<!--            <label for="id">-->
+<!--                ReceiverId-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input type="number" id="giverId"-->
+<!--                   th:field="${recommendation.giverId}" readonly>-->
+<!--            <label for="giverId">-->
+<!--                GiverId-->
+<!--            </label>-->
+<!--        </div>-->
+        <div>
+            <input type="text" id="title"
+                   th:field="*{messageTitle}"
+                   required/>
+            <label for="title">
+                Title
+            </label>
+        </div>
+        <div>
+            <input type="text" id="message" rows="7" cols="50"
+                      th:field="*{message}"/>
+            <label for="message">
+                Message
+            </label>
+        </div>
+
+        <input type="submit" value="SEND"/>
+
+    </form>
+
+</div>
+</body>
+</html>

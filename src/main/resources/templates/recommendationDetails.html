@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommendation Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/navbar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sidebar-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/table-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/registration-style.css}" rel="stylesheet"/>
+    <style>
+        .sidenav {
+            height: 100%;
+        }
+
+        #grad1 {
+            z-index: -3;
+            background-image: linear-gradient(to bottom left, rgb(0, 0, 0), rgb(128, 133, 238));
+        }
+
+        .container h4 {
+            font-family: sans-serif;
+            text-align: left;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .container p {
+            margin-bottom: 20px;
+        }
+
+        .container span {
+            color: rgb(0, 0, 0);
+        }
+
+        .container button {
+            border-radius: 25px;
+            width: 100%;
+            height: 40px;
+            cursor: pointer;
+            background: rgb(66, 133, 244);
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .container button:hover {
+            background: #f7497d;
+        }
+    </style>
+
+</head>
+<body>
+<header th:replace="navbar"></header>
+<header class="sidenav" th:replace="sidebar"></header>
+<div id="grad1"></div>
+<div class="container">
+    <h1>
+        RECOMMENDATION DETAILS
+    </h1>
+    <form>
+        <div>
+            <h4>
+                <p>From/To:
+                    <span th:text="${user.firstName.toUpperCase()}"> </span>
+                    <span th:text="${user.lastName.toUpperCase()}"> </span>
+                </p>
+                <p> Send on:
+                    <span th:text="${recommendation.dateAndTime}"> </span>
+
+                </p>
+                <p>
+                    Title:
+                    <span th:text="${recommendation.messageTitle}"></span>
+                </p>
+                <p> Message:
+                    <span th:text="${recommendation.message}"></span>
+                </p>
+            </h4>
+            <p></p>
+        </div>
+    </form>
+
+</div>
+
+
+</body>
+</html>

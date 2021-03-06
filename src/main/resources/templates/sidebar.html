@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
@@ -6,12 +7,17 @@
 <!--</head>-->
 <!--<body>-->
 <header class="sidenav">
+
     <div class="sidenav">
         <a th:href="@{/myAppointments}">Appointments</a>
         <a th:href="@{/myRecommendations}">Recommendations</a>
-        <a href="#">Doctors</a>
+<!--        <a th:href="@{/deleteMyAccount}">Delete Account</a>-->
+        <a href="javascript: document.logoutForm.submit()" > Logout </a>
 
     </div>
+    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+        <input hidden type="submit" value="Logout"/>
+    </form>
 </header>
 
 <!--</body>-->

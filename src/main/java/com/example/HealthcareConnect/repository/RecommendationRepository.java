@@ -8,4 +8,6 @@ import java.util.List;
 public interface RecommendationRepository extends JpaRepository<Recommendation, Integer> {
     List<Recommendation> findByReceiverId(Integer receiverId);
     List<Recommendation> findByGiverId(Integer giverId);
+    void deleteByGiverId(Integer giverId);
+    void deleteByReceiverId(Integer receiverId);
 }

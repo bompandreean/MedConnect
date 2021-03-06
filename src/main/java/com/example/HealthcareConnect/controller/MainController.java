@@ -92,12 +92,7 @@ public class MainController {
         return "resetPassword";
     }
 
-//    @GetMapping("/resetPassword")
-//    public String resetPassword(Model model){
-//        TemporaryPassword temporaryPassword= new TemporaryPassword();
-//        model.addAttribute("temporaryPassword", temporaryPassword);
-//        return "resetPassword";
-//    }
+
 
     @RequestMapping(value="/resetPasswordAction", method=RequestMethod.POST)
     private String resetPasswordAction(@ModelAttribute TemporaryPassword temporaryPassword) {
@@ -121,6 +116,18 @@ public class MainController {
         return "profile";
     }
 
+//    @GetMapping(value="/deleteMyAccount")
+//    private String deletePage(Model model){
+//        model.addAttribute("currentUser", userService.getCurrentUsersDetails());
+//        return "deletePage";
+//    }
+//
+//    //TODO make a method to delete an existing account
+//    @GetMapping(value="/deleteMyAccountAction")
+//    private String deleteMyAccount(){
+//        userService.deleteUserData(userService.getCurrentUserId());
+//        return "redirect:/";
+//    }
 
 
 }

@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -30,20 +31,14 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordRecoveryRepository passwordRecoveryRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private TemporaryUserRepository temporaryUserRepository;
-
-    @Autowired
     private DocRepository docRepository;
+    private AppointmentRepository appointmentRepository;
+    private RecommendationRepository recommendationRepository;
 
 
 
@@ -74,29 +69,6 @@ public class UserService {
         }
     }
 
-
-    public User update(Integer id, User user) {
-        // pacientii sau doctorii sa poata faca update doar la pagina lor
-
-        User oldUser = userRepository
-                .findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-        oldUser.setFirstName(user.getFirstName());
-        oldUser.setLastName(user.getLastName());
-
-        oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(oldUser);
-    }
-
-    public void delete(Integer id) {
-        userRepository.deleteById(id);
-    }
-
-
-    //available only for admins
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
 
     public List<User> findByRole(String role) {
         List<Role> roles;

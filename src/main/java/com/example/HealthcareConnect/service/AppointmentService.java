@@ -22,11 +22,11 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    @Autowired
-    private DocRepository docRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private DocRepository docRepository;
+//
+//    @Autowired
+//    private UserRepository userRepository;
 
     @Autowired
     private RoleRepository roleRepository;

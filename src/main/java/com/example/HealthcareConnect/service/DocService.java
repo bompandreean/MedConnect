@@ -94,6 +94,8 @@ public class DocService {
         if (role != null) {
             if (role.getRole().equalsIgnoreCase("DOCTOR")) {
                 return true;
+            }else if(role.getRole().equalsIgnoreCase("USER")) {
+                roleRepository.deleteByUserId(id);
             }
         }
         return false;

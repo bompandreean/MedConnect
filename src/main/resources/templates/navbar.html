@@ -11,7 +11,7 @@
     <a href="/"> <img class="logo"  th:src="@{/images/logo4.png}" alt="logo"> </a>
     <nav>
         <ul class="nav__links">
-            <li><a href="#">Services</a></li>
+
             <li><a href="/registration" th:if="${currentUser == null}" >I'm a patient</a></li>
             <li><a href="/registerDoctors" th:if="${currentUser == null}" >I'm a doctor</a></li>
         </ul>

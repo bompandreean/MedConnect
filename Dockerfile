@@ -7,6 +7,7 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 # let maven resolve all dependencies from pom
 RUN ./mvnw dependency:resolve
+RUN chmod +x mvnw
 # copy the rest of the app
 COPY src/ src
 #expose a port to acces app

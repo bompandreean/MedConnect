@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmailService {
-    private  String text="To change your password enter this code:  ";
-    private String subject="Password Recovery";
+    private String text = "To change your password enter this code:  ";
+    private String subject = "Password Recovery";
 
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendSimpleMessage(String to, String subject, String text){
+    public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("MedConnectOfficial@gmail.com");
         message.setTo(to);

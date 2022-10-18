@@ -3,7 +3,6 @@ package com.example.HealthcareConnect.service;
 import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.datasource.Role;
 import com.example.HealthcareConnect.datasource.User;
-
 import com.example.HealthcareConnect.exceptions.UserAlreadyExistsException;
 import com.example.HealthcareConnect.exceptions.UserNotFoundException;
 import com.example.HealthcareConnect.repository.DocRepository;
@@ -11,11 +10,7 @@ import com.example.HealthcareConnect.repository.RoleRepository;
 import com.example.HealthcareConnect.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,8 +62,8 @@ public class DocService {
         User dbUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
-        if(alreadyExists(id)){
-        throw new UserAlreadyExistsException("This account already has a doctor role!");
+        if (alreadyExists(id)) {
+            throw new UserAlreadyExistsException("This account already has a doctor role!");
         }
 
         Role roleField = new Role();
@@ -94,7 +89,7 @@ public class DocService {
         if (role != null) {
             if (role.getRole().equalsIgnoreCase("DOCTOR")) {
                 return true;
-            }else if(role.getRole().equalsIgnoreCase("USER")) {
+            } else if (role.getRole().equalsIgnoreCase("USER")) {
                 roleRepository.deleteByUserId(id);
             }
         }
@@ -141,15 +136,16 @@ public class DocService {
         }
         return docRepository.findByUserId(currentId);
     }
-    public String getOldImagePath(Integer id){
-        DocUser doc=docRepository.findById(id)
-                .orElseThrow(()->new UserNotFoundException("not found"));
-       return doc.getImagePath();
+
+    public String getOldImagePath(Integer id) {
+        DocUser doc = docRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("not found"));
+        return doc.getImagePath();
     }
 
-    public DocUser findById(Integer docId){
+    public DocUser findById(Integer docId) {
         return docRepository.findById(docId)
-                .orElseThrow(()->new UserNotFoundException("Doctor not Found!"));
+                .orElseThrow(() -> new UserNotFoundException("Doctor not Found!"));
     }
 }
 

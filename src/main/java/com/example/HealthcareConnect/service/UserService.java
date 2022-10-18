@@ -1,15 +1,10 @@
 package com.example.HealthcareConnect.service;
 
-import com.example.HealthcareConnect.datasource.Appointment;
-import com.example.HealthcareConnect.datasource.DocUser;
 import com.example.HealthcareConnect.datasource.Role;
 import com.example.HealthcareConnect.datasource.User;
 import com.example.HealthcareConnect.exceptions.FieldIsMandatory;
 import com.example.HealthcareConnect.exceptions.UserNotFoundException;
-
 import com.example.HealthcareConnect.repository.*;
-
-
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,10 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
-import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -39,7 +32,6 @@ public class UserService {
     private DocRepository docRepository;
     private AppointmentRepository appointmentRepository;
     private RecommendationRepository recommendationRepository;
-
 
 
     public User create(User user) {
@@ -106,7 +98,7 @@ public class UserService {
                 .getAuthentication().getPrincipal();
 
         if (userDetails instanceof UserDetails) {
-           UserDetails userDetails2=(UserDetails) userDetails;
+            UserDetails userDetails2 = (UserDetails) userDetails;
             String username = userDetails2.getUsername();
             User user = userRepository.findByEmail(username);
             if (user == null) {
@@ -124,14 +116,14 @@ public class UserService {
         return id;
     }
 
-    public String getUserRole(Integer userId){
+    public String getUserRole(Integer userId) {
 
         return roleRepository.findByUserId(userId).getRole().toUpperCase();
     }
 
-    public User findById(Integer userId){
+    public User findById(Integer userId) {
         return userRepository.findById(userId)
-                .orElseThrow(()-> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
 

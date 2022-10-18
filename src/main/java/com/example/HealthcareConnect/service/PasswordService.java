@@ -36,13 +36,13 @@ public class PasswordService {
     private TemporaryPasswordRepository temporaryPasswordRepository;
 
 
-    public String forgetPassword(String email){
-        User user= userRepository.findByEmail(email);
-        if(user == null){
+    public String forgetPassword(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
             throw new UserNotFoundException("This email is not valid!");
         }
 
-        String uuid= UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString();
 
         PasswordRecovery passwordRecovery = new PasswordRecovery();
         passwordRecovery.setUserId(user.getId());
@@ -53,7 +53,7 @@ public class PasswordService {
         return uuid;
     }
 
-    public void resetPassword(TemporaryPassword temporaryPassword){
+    public void resetPassword(TemporaryPassword temporaryPassword) {
         PasswordRecovery passwordRecovery =
                 passwordRecoveryRepository.findByUuid(temporaryPassword.getUid());
 
@@ -73,23 +73,25 @@ public class PasswordService {
         passwordRecoveryRepository.delete(passwordRecovery);
     }
 
-    public void createTemporaryUser(TemporaryUser temporaryUser){
+    public void createTemporaryUser(TemporaryUser temporaryUser) {
         temporaryUserRepository.save(temporaryUser);
     }
-    public void deleteTemporaryUser(){
-        List<TemporaryUser> temporaryUserList= temporaryUserRepository.findAll();
-        for(TemporaryUser tempUser:temporaryUserList){
-        temporaryUserRepository.delete(tempUser);
+
+    public void deleteTemporaryUser() {
+        List<TemporaryUser> temporaryUserList = temporaryUserRepository.findAll();
+        for (TemporaryUser tempUser : temporaryUserList) {
+            temporaryUserRepository.delete(tempUser);
         }
 
     }
 
-    public void createTemporaryPassword(TemporaryPassword temporaryPassword){
+    public void createTemporaryPassword(TemporaryPassword temporaryPassword) {
         temporaryPasswordRepository.save(temporaryPassword);
     }
-    public void deleteTemporaryPassword(){
-        List<TemporaryPassword> temporaryPasswordList=temporaryPasswordRepository.findAll();
-        for(TemporaryPassword tempPass: temporaryPasswordList){
+
+    public void deleteTemporaryPassword() {
+        List<TemporaryPassword> temporaryPasswordList = temporaryPasswordRepository.findAll();
+        for (TemporaryPassword tempPass : temporaryPasswordList) {
             temporaryPasswordRepository.delete(tempPass);
         }
 

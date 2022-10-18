@@ -7,18 +7,15 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Login to DockerHub & Push image
-      - uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: bmpandreea/healthcare
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: bmpandreea/healthcare
+          tags: latest
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}

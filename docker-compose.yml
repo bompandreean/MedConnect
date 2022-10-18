@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  healthcare-app:
+    image: bmpandreea/healthcare:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqlserver/doc_connect
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqlserver
+
+  mysqlserver:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=doc_connect
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+volumes:
+  mysql_data:
+  mysql_config:

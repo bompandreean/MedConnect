@@ -19,7 +19,6 @@ import java.util.Properties;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    HoldMyPassword holdMyPassword=new HoldMyPassword();
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
@@ -56,27 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
-//                .logoutUrl("/logout")
                 .logoutSuccessUrl("/home") //or login
                 .deleteCookies("JSESSIONID")
 
                 .and()
                 .csrf().disable();
-
-//                .logoutSuccessHandler(logoutSuccessHandler());
-
-//                .and()
-//
-//                .logout()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/perform_login")
-//                .defaultSuccessUrl("/home.html", true)
-//                .failureUrl("/login.html?error=true")
-////                .failureHandler(authenticationFailureHandler())
-
-
     }
 
     @Bean
@@ -100,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         mailSender.setPort(587);
 
         mailSender.setUsername("medconnectofficial@gmail.com");
-        mailSender.setPassword(holdMyPassword.getPassword());
+        mailSender.setPassword("wnwzosgxwwhpudlt");
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
